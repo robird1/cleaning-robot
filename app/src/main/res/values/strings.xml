@@ -4,10 +4,17 @@
     <string name="prompt_email">Email</string>
     <string name="prompt_phone">Phone</string>
     <string name="prompt_password">Password</string>
+    <string name="prompt_map_name">Map Name</string>
+    <string name="prompt_map_floor">Map Floor</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_sign_in_short">Sign in</string>
+    <string name="action_create_map">Create Map</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="invalid_map_name">Not a valid map name</string>
+    <string name="invalid_map_floor">Not a valid map floor</string>
+    <string name="create_map_failed">"enter map mode failed"</string>
+    <string name="create_map_success">"enter map mode successfully"</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.ulsee.dabai.ui.login
 
 import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -17,6 +18,7 @@ import android.widget.Toast
 import androidx.lifecycle.viewModelScope
 
 import com.ulsee.dabai.R
+import com.ulsee.dabai.ui.map.CreateMapActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -68,6 +70,8 @@ class LoginActivity : AppCompatActivity() {
 
             //Complete and destroy login activity once successful
             finish()
+            val intent = Intent(this, CreateMapActivity::class.java)
+            startActivity(intent)
         })
 
         username.afterTextChanged {
