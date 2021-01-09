@@ -3,6 +3,7 @@ package com.ulsee.dabai.ui.map
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.util.Log
+import android.util.Size
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -14,28 +15,21 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.ulsee.dabai.R
 import com.ulsee.dabai.data.RobotRepository
+import com.ulsee.dabai.data.response.MapInfo
 import io.github.controlwear.virtual.joystick.android.JoystickView
-import java.lang.Exception
 
 private val TAG = ExploreActivity::class.java.simpleName
 
 class ExploreActivity: AppCompatActivity() {
 //    @BindView(R.id.imageView)
     lateinit var imageView: ImageView
-    @BindView(R.id.textView_position)
     var positionTV: TextView? = null
-    @BindView(R.id.relativeLayout)
     var mapContainer: RelativeLayout? = null
-//    @BindView(R.id.progressBar)
+    var robotIV: ImageView? = null
+
     lateinit var progressBar: ProgressBar
-    @BindView(R.id.textView_error)
-    var errorTV: TextView? = null
-    @BindView(R.id.seekBar)
-    var seekBar: SeekBar? = null
-    @BindView(R.id.textView2)
-    var joystickOnMove: TextView? = null
-    @BindView(R.id.textView4)
-    var debugView: TextView? = null
+
+    var mMapSize : Size? = null
 
     private lateinit var mProgressDialog: ProgressDialog
     private lateinit var viewModel: ExploreViewModel
@@ -46,6 +40,9 @@ class ExploreActivity: AppCompatActivity() {
         setContentView(R.layout.activity_explore)
         supportActionBar!!.title = "建圖模式"
         ButterKnife.bind(this)
+        positionTV = findViewById(R.id.textView_position)
+        robotIV = findViewById(R.id.imageView_robot)
+        mapContainer = findViewById(R.id.relativeLayout)
         imageView = findViewById(R.id.imageView)
         progressBar = findViewById(R.id.progressBar)
         initRobotRepository()
@@ -70,9 +67,13 @@ class ExploreActivity: AppCompatActivity() {
         robotRepository = RobotRepository()
 
         val ctx = this
-        robotRepository.setEventListener(object: RobotRepository.EventListener{
+        robotRepository.setEventListener(object : RobotRepository.EventListener {
             override fun onPositionUpdated(pose: Array<Double>) {
-                // TODO
+                updatePosition(pose[0], pose[1])
+            }
+
+            override fun onMapUpdated(data: MapInfo) {
+                updateMapInfo(data)
             }
 
             override fun onConnected() {
@@ -80,12 +81,24 @@ class ExploreActivity: AppCompatActivity() {
             }
 
             override fun onConnectFailed(exception: Exception) {
-                runOnUiThread { Toast.makeText(ctx, "connect failed: "+exception.message, Toast.LENGTH_LONG).show() }
+                runOnUiThread {
+                    Toast.makeText(
+                        ctx,
+                        "connect failed: " + exception.message,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
                 finish()
             }
 
             override fun onError(exception: Exception) {
-                runOnUiThread { Toast.makeText(ctx, "error: "+exception.message, Toast.LENGTH_LONG).show() }
+                runOnUiThread {
+                    Toast.makeText(
+                        ctx,
+                        "error: " + exception.message,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
                 finish()
             }
         })
@@ -121,7 +134,6 @@ class ExploreActivity: AppCompatActivity() {
         viewModel = ViewModelProvider(this, ExploreViewModelFactory())
             .get(ExploreViewModel::class.java)
     }
-
 
     private fun initJoyStick() {
         val isStop = booleanArrayOf(false)
@@ -166,12 +178,22 @@ class ExploreActivity: AppCompatActivity() {
                 robotRepository.move(movement[0])
             }
             if (rotation[0] != 0.0) {
-                robotRepository.rotate(rotation[0]* 50)
+                robotRepository.rotate(rotation[0] * 50)
             }
         }
     }
 
     private fun stopMove() {
         robotRepository.move(0.0)
+    }
+
+    fun updatePosition(x: Double, y: Double) {
+        val dp = resources.displayMetrics.density.toDouble()
+
+        viewModel.updateRobotPosition(mapContainer!!, robotIV!!, positionTV!!,x, y, dp)
+    }
+
+    fun updateMapInfo(data: MapInfo) {
+        viewModel.updateMapInfo(data)
     }
 }

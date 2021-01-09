@@ -5,6 +5,7 @@ import com.github.nkzawa.socketio.client.IO
 import com.github.nkzawa.socketio.client.Socket
 import com.google.gson.Gson
 import com.ulsee.dabai.data.request.RobotVelocity
+import com.ulsee.dabai.data.response.MapInfo
 import com.ulsee.dabai.data.response.RobotStatus
 import org.json.JSONArray
 import org.json.JSONObject
@@ -23,6 +24,7 @@ class RobotRepository {
     interface EventListener {
 //        fun onStatus(status: RobotStatus)
         fun onPositionUpdated(pose: Array<Double>)
+        fun onMapUpdated(data: MapInfo)
         fun onConnected()
         fun onConnectFailed(exception: Exception)
         fun onError(exception: Exception)
@@ -41,9 +43,16 @@ class RobotRepository {
             it.on("RobotStatus") { data ->
                 val jsonStr = data[0].toString()
                 val robotStatus = Gson().fromJson(jsonStr, RobotStatus::class.java)
+                Log.d(TAG, "on RobotStatus:"+robotStatus.motion.pose[0]+","+robotStatus.motion.pose[1])
                 mEventListener?.onPositionUpdated(robotStatus.motion.pose)
             }
 
+            it.on("MapUpdate") { data ->
+                val jsonStr = data[0].toString()
+                val data = Gson().fromJson(jsonStr, MapInfo::class.java)
+                Log.d(TAG, "on MapInfo:"+data.width)
+                mEventListener?.onMapUpdated(data)
+            }
             it.connect()
                 .on(Socket.EVENT_CONNECT) {
                     Log.d(TAG, "Socket connected!!!!!")
