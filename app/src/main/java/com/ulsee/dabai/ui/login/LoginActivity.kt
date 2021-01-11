@@ -36,8 +36,8 @@ class LoginActivity : AppCompatActivity() {
         val loading = findViewById<ProgressBar>(R.id.loading)
 
         // test data
-        username.setText("15882282186")
-        password.setText("282186")
+//        username.setText("15882282186")
+//        password.setText("282186")
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
                 .get(LoginViewModel::class.java)
