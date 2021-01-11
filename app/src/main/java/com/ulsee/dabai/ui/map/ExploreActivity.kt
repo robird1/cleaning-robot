@@ -38,7 +38,7 @@ class ExploreActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_explore)
-        supportActionBar!!.title = "建圖模式"
+        supportActionBar!!.title = "建圖模式 ULSee"
         ButterKnife.bind(this)
         positionTV = findViewById(R.id.textView_position)
         robotIV = findViewById(R.id.imageView_robot)
