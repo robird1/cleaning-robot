@@ -17,4 +17,6 @@
     <string name="invalid_map_floor">Not a valid map floor</string>
     <string name="create_map_failed">"enter map mode failed"</string>
     <string name="create_map_success">"enter map mode successfully"</string>
+    <string name="action_ok">OK</string>
+    <string name="wifi_connection_hint">請連線到清潔機器人的WIFI</string>
 </resources>

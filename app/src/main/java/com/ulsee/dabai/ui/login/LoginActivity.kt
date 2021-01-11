@@ -20,6 +20,7 @@ import androidx.lifecycle.viewModelScope
 import com.ulsee.dabai.R
 import com.ulsee.dabai.ui.map.CreateMapActivity
 import com.ulsee.dabai.ui.map.ExploreActivity
+import com.ulsee.dabai.ui.tutorials.WIFIConnectionTutorialActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -71,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
 
             //Complete and destroy login activity once successful
             finish()
-            val intent = Intent(this, CreateMapActivity::class.java)
+            val intent = Intent(this, WIFIConnectionTutorialActivity::class.java)
             startActivity(intent)
         })
 
@@ -113,11 +114,11 @@ class LoginActivity : AppCompatActivity() {
         val welcome = getString(R.string.welcome)
         val displayName = model.token
         // TODO : initiate successful logged in experience
-        Toast.makeText(
-                applicationContext,
-                "$welcome $displayName",
-                Toast.LENGTH_LONG
-        ).show()
+//        Toast.makeText(
+//                applicationContext,
+//                "$welcome $displayName",
+//                Toast.LENGTH_LONG
+//        ).show()
     }
 
     private fun showLoginFailed(@StringRes errorString: Int) {
