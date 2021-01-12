@@ -66,14 +66,8 @@ class LoginActivity : AppCompatActivity() {
             }
             if (loginResult.success != null) {
                 updateUiWithUser(loginResult.success)
+                goNextPage()
             }
-            setResult(Activity.RESULT_OK)
-
-
-            //Complete and destroy login activity once successful
-            finish()
-            val intent = Intent(this, WIFIConnectionTutorialActivity::class.java)
-            startActivity(intent)
         })
 
         username.afterTextChanged {
@@ -108,6 +102,15 @@ class LoginActivity : AppCompatActivity() {
                 loginViewModel.login(username.text.toString(), password.text.toString())
             }
         }
+    }
+
+    private fun goNextPage() {
+        setResult(Activity.RESULT_OK)
+
+        //Complete and destroy login activity once successful
+        finish()
+        val intent = Intent(this, WIFIConnectionTutorialActivity::class.java)
+        startActivity(intent)
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {
