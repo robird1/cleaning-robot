@@ -28,6 +28,7 @@
             </ImageView>
                         <ImageView
                             android:id="@+id/imageView_robot"
+                            android:visibility="invisible"
                             android:src="@drawable/ic_launcher_background"
                             android:layout_width="6dp"
                             android:layout_height="6dp"

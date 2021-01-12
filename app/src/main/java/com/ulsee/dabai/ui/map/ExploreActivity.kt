@@ -190,10 +190,10 @@ class ExploreActivity: AppCompatActivity() {
     fun updatePosition(x: Double, y: Double) {
         val dp = resources.displayMetrics.density.toDouble()
 
-        viewModel.updateRobotPosition(mapContainer!!, robotIV!!, positionTV!!,x, y, dp)
+        if (viewModel != null) viewModel.updateRobotPosition(mapContainer!!, robotIV!!, positionTV!!,x, y, dp)
     }
 
     fun updateMapInfo(data: MapInfo) {
-        viewModel.updateMapInfo(data)
+        if (viewModel != null) viewModel.updateMapInfo(data)
     }
 }

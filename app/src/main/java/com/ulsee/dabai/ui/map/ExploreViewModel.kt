@@ -37,16 +37,19 @@ class ExploreViewModel(private val repository: ExploreRepository) : ViewModel() 
     val loadDynamicMapResult: LiveData<CreateMapResult> = _loadDynamicMapResult
 
     var mMapInfo : MapInfo? = null
-    var robotPoint = MutableLiveData<PointF?>()
+    var mRobotPoint : PointF? = null
+    var mMapInfoUpdatedAt = 0L
+    var mRobotInfoUpdatedAt = 0L
+    val mMapUpdateInterval = 100L
 
     fun loadDynamicMap(context: Context, imageView: ImageView) {
         viewModelScope.launch {
+            val robotImageSize = Size(12, 12)
             var url = getUrl()
             var oldImageUrl = url
-            var oldBitmap: Bitmap?
             Glide.with(context).load(url).into(imageView);
 
-            delay(1000)
+            delay(mMapUpdateInterval)
             while (true) {
                 url = getUrl()
 //                Glide
@@ -71,31 +74,44 @@ class ExploreViewModel(private val repository: ExploreRepository) : ViewModel() 
                             resource: Bitmap,
                             transition: Transition<in Bitmap>?
                         ) {
-                            oldBitmap = resource
-                            val robotImageSize = Size(12, 12)
+
+                            // 如果 地圖資訊更新了，但是機器人尚未更新，就先不要更新此次地圖
+                            if (mMapInfoUpdatedAt > mRobotInfoUpdatedAt) {
+                                return
+                            }
 
                             val bmOverlay = Bitmap.createBitmap(
-                                resource.getWidth(),
-                                resource.getHeight(),
-                                resource.getConfig()
+                                    resource.width,
+                                    resource.height,
+                                    resource.config
                             )
                             val canvas = Canvas(bmOverlay)
                             canvas.drawBitmap(resource, Matrix(), null)
-//                            canvas.drawBitmap(robotBitmap, Matrix(), null)
-                            if (robotPoint.value != null) {
-                                val robotBitmap = context.resources.getDrawable(R.drawable.ic_launcher_foreground, null).toBitmap(robotImageSize.width, robotImageSize.height)
-
-//                                canvas.drawBitmap(robotBitmap, robotPoint.value!!.x, robotPoint.value!!.y, null)
-                                val x = robotPoint.value!!.x - robotImageSize.width/2
-                                val y = robotPoint.value!!.y - robotImageSize.height/2
-                                canvas.drawBitmap(robotBitmap, x, y, null)
+                            
+                            // 如果 地圖資訊 或是 機器人資訊尚未取得，不顯示機器人資訊
+                            if (mMapInfo == null || mRobotPoint == null) {
+                                imageView.setImageBitmap(bmOverlay)
+                                return
                             }
+
+                            // 如果地圖資訊，跟當前地圖檔案不匹配，不顯示此次地圖
+                            if (mMapInfo!!.width != resource.width || mMapInfo!!.height != resource.height) {
+                                return
+                            }
+
+                            // 更新地圖、機器人位置
+                            val robotBitmap = context.resources.getDrawable(R.drawable.ic_launcher_foreground, null).toBitmap(robotImageSize.width, robotImageSize.height)
+                            val x = mRobotPoint!!.x - robotImageSize.width/2
+                            val y = mRobotPoint!!.y - robotImageSize.height/2
+                            canvas.drawBitmap(robotBitmap, x, y, null)
                             imageView.setImageBitmap(bmOverlay)
+
+                            Log.d(TAG, String.format("drawing: (%.2f, %.2f) on %dx%d", x,y,resource.width, resource.height))
                         }
 
                     })
 
-                delay(1000)
+                delay(mMapUpdateInterval)
             }
         }
     }
@@ -141,7 +157,9 @@ class ExploreViewModel(private val repository: ExploreRepository) : ViewModel() 
         }
     }
     fun updateMapInfo(data: MapInfo) {
+        // mapInfo更新後，要丟掉舊的robot status 座標點
         mMapInfo = data
+        mMapInfoUpdatedAt = System.currentTimeMillis()
     }
 
     fun updateRobotPosition(
@@ -165,10 +183,11 @@ class ExploreViewModel(private val repository: ExploreRepository) : ViewModel() 
         val xPointImagePixel: Double = x / resolution
         val yPointImagePixel: Double = -y / resolution
 
-        robotPoint.postValue(PointF(
+        mRobotPoint = PointF(
             (originXPixel + xPointImagePixel).toFloat(),
             (originYPixel + yPointImagePixel).toFloat()
-        ))
+        )
+        mRobotInfoUpdatedAt = System.currentTimeMillis()
         // 根據圖片的 pixel 與 螢幕的顯示 mapContainer 轉換成螢幕上的 pixel點(x,y)
         val containerWidth = mapContainer.measuredWidth.toDouble()
         val containerHeight = mapContainer.measuredHeight.toDouble()
