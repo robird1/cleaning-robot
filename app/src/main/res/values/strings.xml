@@ -17,6 +17,9 @@
     <string name="invalid_map_floor">Not a valid map floor</string>
     <string name="create_map_failed">"enter map mode failed"</string>
     <string name="create_map_success">"enter map mode successfully"</string>
+    <string name="get_robot_list_failed">"Failed to get robots"</string>
     <string name="action_ok">OK</string>
     <string name="wifi_connection_hint">請連線到清潔機器人的WIFI</string>
+    <string name="error_no_project">"Error: You don't have project"</string>
+
 </resources>

@@ -11,10 +11,9 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import butterknife.BindView
 import butterknife.ButterKnife
 import com.ulsee.dabai.R
-import com.ulsee.dabai.data.RobotRepository
+import com.ulsee.dabai.data.RobotWIFIRepository
 import com.ulsee.dabai.data.response.MapInfo
 import io.github.controlwear.virtual.joystick.android.JoystickView
 
@@ -33,7 +32,7 @@ class ExploreActivity: AppCompatActivity() {
 
     private lateinit var mProgressDialog: ProgressDialog
     private lateinit var viewModel: ExploreViewModel
-    private lateinit var robotRepository: RobotRepository
+    private lateinit var robotRepository: RobotWIFIRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,10 +63,10 @@ class ExploreActivity: AppCompatActivity() {
     }
 
     private fun initRobotRepository() {
-        robotRepository = RobotRepository()
+        robotRepository = RobotWIFIRepository()
 
         val ctx = this
-        robotRepository.setEventListener(object : RobotRepository.EventListener {
+        robotRepository.setEventListener(object : RobotWIFIRepository.EventListener {
             override fun onPositionUpdated(pose: Array<Double>) {
                 updatePosition(pose[0], pose[1])
             }

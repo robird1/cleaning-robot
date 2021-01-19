@@ -13,6 +13,9 @@ class LoginRepository(val dataSource: LoginDataSource) {
     var token: String? = null
         private set
 
+    var projectID: Int? = null
+        private set
+
     val isLoggedIn: Boolean
         get() = token != null
 
@@ -20,10 +23,12 @@ class LoginRepository(val dataSource: LoginDataSource) {
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
         token = null
+        projectID = null
     }
 
     fun logout() {
         token = null
+        projectID = null
         dataSource.logout()
     }
 
@@ -40,6 +45,7 @@ class LoginRepository(val dataSource: LoginDataSource) {
 
     private fun setLoggedInUserInfo(info: LoginResponse) {
         this.token = info.data.token
+        this.projectID = info.data.projects.firstOrNull()?.project_id
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
     }

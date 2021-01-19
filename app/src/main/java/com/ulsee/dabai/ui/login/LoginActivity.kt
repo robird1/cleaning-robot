@@ -18,8 +18,10 @@ import android.widget.Toast
 import androidx.lifecycle.viewModelScope
 
 import com.ulsee.dabai.R
+import com.ulsee.dabai.data.ApiService
 import com.ulsee.dabai.ui.map.CreateMapActivity
 import com.ulsee.dabai.ui.map.ExploreActivity
+import com.ulsee.dabai.ui.robot.RobotListActivity
 import com.ulsee.dabai.ui.tutorials.WIFIConnectionTutorialActivity
 
 class LoginActivity : AppCompatActivity() {
@@ -65,8 +67,7 @@ class LoginActivity : AppCompatActivity() {
                 showLoginFailed(loginResult.error)
             }
             if (loginResult.success != null) {
-                updateUiWithUser(loginResult.success)
-                goNextPage()
+                goNextPage(loginResult.success)
             }
         })
 
@@ -104,24 +105,19 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun goNextPage() {
+    private fun goNextPage(model: LoggedInUserView) {
+        if (model.projectID == null) {
+            Toast.makeText(applicationContext, R.string.error_no_project, Toast.LENGTH_SHORT).show()
+            return
+        }
         setResult(Activity.RESULT_OK)
 
         //Complete and destroy login activity once successful
         finish()
-        val intent = Intent(this, WIFIConnectionTutorialActivity::class.java)
+        ApiService.token = model.token
+        val intent = Intent(this, RobotListActivity::class.java)
+        intent.putExtra("project-id", model.projectID!!)
         startActivity(intent)
-    }
-
-    private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome)
-        val displayName = model.token
-        // TODO : initiate successful logged in experience
-//        Toast.makeText(
-//                applicationContext,
-//                "$welcome $displayName",
-//                Toast.LENGTH_LONG
-//        ).show()
     }
 
     private fun showLoginFailed(@StringRes errorString: Int) {

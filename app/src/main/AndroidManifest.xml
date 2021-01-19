@@ -26,6 +26,8 @@
         <activity
             android:name=".ui.map.CreateMapActivity" />
         <activity
+            android:name=".ui.robot.RobotListActivity" />
+        <activity
             android:name=".ui.map.ExploreActivity" android:screenOrientation="portrait" />
 
     </application>

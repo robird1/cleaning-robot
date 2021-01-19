@@ -11,7 +11,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.Exception
 
-class RobotRepository {
+class RobotWIFIRepository {
 
     val TAG = "RobotRepository"
     private var mSocket: Socket? = null
