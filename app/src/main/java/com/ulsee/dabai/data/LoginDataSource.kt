@@ -17,7 +17,12 @@ class LoginDataSource(val url: String) {
         }
     }
 
-    fun logout() {
-        // TODO: revoke authentication
+    suspend fun logout(): Result<LoginResponse> {
+        return try {
+            val response = ApiService.create(url).logout()
+            Result.Success(response)
+        } catch (e: Exception) {
+            Result.Error(e)
+        }
     }
 }

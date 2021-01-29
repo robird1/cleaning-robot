@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation_bottom"
+    app:startDestination="@+id/navigation_robot">
+
+    <fragment
+        android:id="@+id/navigation_robot"
+        android:name="com.ulsee.dabai.ui.main.robot.RobotListFragment"
+        android:label="@string/title_robot"
+        tools:layout="@layout/fragment_robot_list" />
+
+    <fragment
+        android:id="@+id/navigation_map"
+        android:name="com.ulsee.dabai.ui.main.map.MapListFragment"
+        android:label="@string/title_map"
+        tools:layout="@layout/fragment_map_list" />
+
+    <fragment
+        android:id="@+id/navigation_task"
+        android:name="com.ulsee.dabai.ui.main.task.TaskListFragment"
+        android:label="@string/title_task"
+        tools:layout="@layout/fragment_task_list" />
+</navigation>

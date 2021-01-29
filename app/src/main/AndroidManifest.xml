@@ -26,7 +26,13 @@
         <activity
             android:name=".ui.map.CreateMapActivity" />
         <activity
-            android:name=".ui.robot.RobotListActivity" />
+            android:name="com.ulsee.dabai.ui.main.MainActivity" android:theme="@style/Theme.Dabai.NoActionBar" />
+        <activity
+            android:name="com.ulsee.dabai.ui.main.robot.RobotListActivity" />
+        <activity
+            android:name="com.ulsee.dabai.ui.main.map.MapListActivity" />
+        <activity
+            android:name="com.ulsee.dabai.ui.main.task.TaskListActivity" />
         <activity
             android:name=".ui.map.ExploreActivity" android:screenOrientation="portrait" />
 

@@ -15,14 +15,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.lifecycle.viewModelScope
 
 import com.ulsee.dabai.R
 import com.ulsee.dabai.data.ApiService
-import com.ulsee.dabai.ui.map.CreateMapActivity
-import com.ulsee.dabai.ui.map.ExploreActivity
-import com.ulsee.dabai.ui.robot.RobotListActivity
-import com.ulsee.dabai.ui.tutorials.WIFIConnectionTutorialActivity
+import com.ulsee.dabai.ui.main.MainActivity
+import com.ulsee.dabai.ui.main.robot.RobotListActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -39,8 +36,8 @@ class LoginActivity : AppCompatActivity() {
         val loading = findViewById<ProgressBar>(R.id.loading)
 
         // test data
-//        username.setText("15882282186")
-//        password.setText("282186")
+        username.setText("15882282186")
+        password.setText("282186")
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
                 .get(LoginViewModel::class.java)
@@ -115,7 +112,7 @@ class LoginActivity : AppCompatActivity() {
         //Complete and destroy login activity once successful
         finish()
         ApiService.token = model.token
-        val intent = Intent(this, RobotListActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         intent.putExtra("project-id", model.projectID!!)
         startActivity(intent)
     }

@@ -26,10 +26,10 @@ class LoginRepository(val dataSource: LoginDataSource) {
         projectID = null
     }
 
-    fun logout() {
+    suspend fun logout(): Result<LoginResponse> {
         token = null
         projectID = null
-        dataSource.logout()
+        return dataSource.logout()
     }
 
     suspend fun login(username: String, password: String): Result<LoginResponse> {

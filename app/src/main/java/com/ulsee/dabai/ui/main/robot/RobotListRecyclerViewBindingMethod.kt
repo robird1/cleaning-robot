@@ -1,4 +1,4 @@
-package com.ulsee.dabai.ui.robot
+package com.ulsee.dabai.ui.main.robot
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView

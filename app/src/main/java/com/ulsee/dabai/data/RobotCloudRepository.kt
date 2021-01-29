@@ -12,7 +12,6 @@ class RobotCloudRepository(val dataSource: RobotCloudDataSource) {
     }
 
     suspend fun getList(projectID: Int): Result<RobotListResponse> {
-        // handle login
         val result = dataSource.getList(projectID)
 
         if (result is Result.Success) {

@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">ULSee</string>
+    <!-- navigation -->
+    <string name="title_robot">Robot</string>
+    <string name="title_map">Map</string>
+    <string name="title_task">Task</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">ULSEE</string>
+    <string name="nav_header_subtitle">大白清潔APP</string>
+    <string name="manu_logout">Logout</string>
+    <string name="menu_create_map">Create Map</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_phone">Phone</string>
@@ -18,6 +28,8 @@
     <string name="create_map_failed">"enter map mode failed"</string>
     <string name="create_map_success">"enter map mode successfully"</string>
     <string name="get_robot_list_failed">"Failed to get robots"</string>
+    <string name="get_map_list_failed">"Failed to get maps"</string>
+    <string name="get_task_list_failed">"Failed to get tasks"</string>
     <string name="action_ok">OK</string>
     <string name="wifi_connection_hint">請連線到清潔機器人的WIFI</string>
     <string name="error_no_project">"Error: You don't have project"</string>

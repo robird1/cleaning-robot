@@ -1,7 +1,6 @@
-package com.ulsee.dabai.ui.robot
+package com.ulsee.dabai.ui.main.robot
 
 import android.os.Bundle
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -18,6 +17,8 @@ class RobotListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val projectID = intent.getIntExtra("project-id", 0)
 
         robotListViewModel = ViewModelProvider(this, RobotListViewModelFactory())
                 .get(RobotListViewModel::class.java)
@@ -41,8 +42,6 @@ class RobotListActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.setHasFixedSize(true)
 
-        // projectID?
-        val projectID = intent.getIntExtra("project-id", 0)
         robotListViewModel.getList(projectID)
 
         robotListViewModel.robotListResult.observe(this, Observer {
@@ -51,4 +50,5 @@ class RobotListActivity : AppCompatActivity() {
             }
         })
     }
+
 }

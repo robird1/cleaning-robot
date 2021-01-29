@@ -8,7 +8,7 @@
 
         <variable
             name="viewmodel"
-            type="com.ulsee.dabai.ui.main.robot.RobotListViewModel"/>
+            type="com.ulsee.dabai.ui.main.map.MapListViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:robotItems="@{viewmodel.robotListResult}" ></androidx.recyclerview.widget.RecyclerView>
+            app:mapItems="@{viewmodel.mapListResult}" ></androidx.recyclerview.widget.RecyclerView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

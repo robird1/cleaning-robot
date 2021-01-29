@@ -1,4 +1,4 @@
-package com.ulsee.dabai.ui.robot
+package com.ulsee.dabai.ui.main.robot
 
 import com.ulsee.dabai.data.response.Robot
 

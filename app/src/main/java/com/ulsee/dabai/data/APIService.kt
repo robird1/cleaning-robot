@@ -2,10 +2,7 @@ package com.ulsee.dabai.data
 
 import com.ulsee.dabai.data.request.CreateMapRequest
 import com.ulsee.dabai.data.request.LoginRequest
-import com.ulsee.dabai.data.response.CreateMapResponse
-import com.ulsee.dabai.data.response.LoadDynamicMapResponse
-import com.ulsee.dabai.data.response.LoginResponse
-import com.ulsee.dabai.data.response.RobotListResponse
+import com.ulsee.dabai.data.response.*
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -20,8 +17,11 @@ import java.util.concurrent.TimeUnit
 interface ApiService {
 
 //    @POST("https://clear.hallbot.com/cloud/login/check/phone")
-    @POST("https://120.78.217.167:5200/v1/login")
+    @POST("/v1/login")
     suspend fun login(@Body params: LoginRequest): LoginResponse
+
+    @POST("/v1/signout")
+    suspend fun logout(): LoginResponse
 
     @POST("/api/maps")
     suspend fun createMap(@Body params: CreateMapRequest): CreateMapResponse
@@ -31,6 +31,20 @@ interface ApiService {
 
     @GET("/v1/{projectID}/robots")
     suspend fun getRobotList(@Path("projectID") projectID: Int): RobotListResponse
+
+    @GET("/v1/{projectID}/maps")
+    suspend fun getMapList(@Path("projectID") projectID: Int): MapListResponse
+
+    @GET("/v1/{projectID}/tasks")
+    suspend fun getTaskList(@Path("projectID") projectID: Int): TaskListResponse
+
+//todo test, modify response
+    @POST("/v1/{projectID}/robots/{robotID}/location")
+    suspend fun positioning(@Path("projectID") projectID: Int, @Path("robotID") robotID: Int): CreateMapResponse
+
+//todo test, modify response
+    @POST("/v1/{projectID}/tasks/{taskID}/send")
+    suspend fun executeTask(@Path("projectID") projectID: Int, @Path("taskID") taskID: Int): CreateMapResponse
 
     companion object {
         var token: String? = null

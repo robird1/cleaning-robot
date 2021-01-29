@@ -5,20 +5,21 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
-            name="viewmodel"
-            type="com.ulsee.dabai.ui.main.robot.RobotListViewModel"/>
+            name="dataItem"
+            type="com.ulsee.dabai.data.response.Task"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="40dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:robotItems="@{viewmodel.robotListResult}" ></androidx.recyclerview.widget.RecyclerView>
+            android:text="@{dataItem.name}"
+            android:textColor="@android:color/black"
+            android:gravity="center|start"
+            android:paddingStart="10dp"></TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
