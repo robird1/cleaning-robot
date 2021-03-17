@@ -1,4 +1,4 @@
-package com.ulsee.dabai.ui.map
+package com.ulsee.dabai.ui.robot_local
 
 import android.content.Context
 import android.graphics.*
@@ -8,7 +8,6 @@ import android.util.Size
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.*
 import com.bumptech.glide.Glide

@@ -2,15 +2,12 @@ package com.ulsee.dabai.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -22,7 +19,8 @@ import com.ulsee.dabai.ui.login.LoginActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import com.ulsee.dabai.R
-import com.ulsee.dabai.ui.map.CreateMapActivity
+import com.ulsee.dabai.ui.robot_local.CreateMapActivity
+import com.ulsee.dabai.ui.robot_local.LocalMapListActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -72,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         navView.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.nav_create_map -> startActivity(Intent(this, CreateMapActivity::class.java))
+                R.id.nav_robot_map -> startActivity(Intent(this, LocalMapListActivity::class.java))
                 R.id.nav_logout -> logout()
             }
             return@setNavigationItemSelectedListener false

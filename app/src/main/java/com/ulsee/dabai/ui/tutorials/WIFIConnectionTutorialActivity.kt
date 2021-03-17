@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.ulsee.dabai.R
-import com.ulsee.dabai.ui.map.CreateMapActivity
+import com.ulsee.dabai.ui.robot_local.CreateMapActivity
 
 class WIFIConnectionTutorialActivity: AppCompatActivity() {
 

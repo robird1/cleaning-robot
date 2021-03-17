@@ -1,4 +1,4 @@
-package com.ulsee.dabai.ui.map
+package com.ulsee.dabai.ui.robot_local
 
 import android.util.Log
 import androidx.lifecycle.*

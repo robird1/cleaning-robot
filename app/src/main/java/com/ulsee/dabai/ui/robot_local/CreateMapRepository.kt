@@ -1,4 +1,4 @@
-package com.ulsee.dabai.ui.map
+package com.ulsee.dabai.ui.robot_local
 
 import com.ulsee.dabai.data.Result
 import com.ulsee.dabai.data.RobotDataSource

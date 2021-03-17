@@ -1,4 +1,4 @@
-package com.ulsee.dabai.ui.map
+package com.ulsee.dabai.ui.robot_local
 
 import android.content.Intent
 import android.os.Bundle

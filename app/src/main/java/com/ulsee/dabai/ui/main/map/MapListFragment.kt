@@ -10,7 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ulsee.dabai.R
+import com.ulsee.dabai.data.request.PositioningRequest
+import com.ulsee.dabai.data.request.PositioningRequestPose
 import com.ulsee.dabai.data.response.Map
+import com.ulsee.dabai.data.response.Robot
 import com.ulsee.dabai.databinding.FragmentMapListBinding
 
 class MapListFragment : Fragment() {
@@ -34,6 +37,10 @@ class MapListFragment : Fragment() {
             override fun onItemClicked(item: Map) {
                 // todo: 建圖或執行腳本
                 Toast.makeText(context, "TODO", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onUpload(item: Map) {
+                // ignore
             }
         })
         // recylerview

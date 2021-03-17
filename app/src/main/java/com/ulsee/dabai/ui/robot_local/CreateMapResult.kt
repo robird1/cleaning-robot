@@ -1,6 +1,4 @@
-package com.ulsee.dabai.ui.map
-
-import com.ulsee.dabai.ui.login.LoggedInUserView
+package com.ulsee.dabai.ui.robot_local
 
 data class CreateMapResult(
 //    val success: LoggedInUserView? = null,

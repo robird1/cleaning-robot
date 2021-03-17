@@ -1,4 +1,4 @@
-package com.ulsee.dabai.ui.main.map
+package com.ulsee.dabai.ui.robot_local
 
 import android.os.Bundle
 import android.widget.Toast
@@ -10,18 +10,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ulsee.dabai.R
 import com.ulsee.dabai.data.response.Map
 import com.ulsee.dabai.databinding.ActivityMapListBinding
+import com.ulsee.dabai.databinding.ActivityRobotlocalMaplistBinding
+import com.ulsee.dabai.ui.main.map.MapListAdapter
 
-class MapListActivity : AppCompatActivity() {
+class LocalMapListActivity : AppCompatActivity() {
 
-    private lateinit var mapListViewModel: MapListViewModel
+    private lateinit var mapListViewModel: LocalMapListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mapListViewModel = ViewModelProvider(this, MapListViewModelFactory())
-            .get(MapListViewModel::class.java)
+        mapListViewModel = ViewModelProvider(this, LocalMapListViewModelFactory())
+                .get(LocalMapListViewModel::class.java)
 
-        val binding: ActivityMapListBinding = DataBindingUtil.setContentView(this, R.layout.activity_robot_list)
+        val binding: ActivityRobotlocalMaplistBinding = DataBindingUtil.setContentView(this, R.layout.activity_robotlocal_maplist)
 
         // Bind layout with ViewModel
         binding.viewmodel = mapListViewModel
@@ -30,14 +32,15 @@ class MapListActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         binding.recyclerView.adapter = MapListAdapter(object: MapListAdapter.OnItemClickListener{
-
-            override fun onItemClicked(item: com.ulsee.dabai.data.response.Map) {
-                // todo: 建圖或執行腳本
-                Toast.makeText(this@MapListActivity, "TODO", Toast.LENGTH_LONG).show()
+            override fun onItemClicked(item: Map) {
+                // ignore
             }
 
             override fun onUpload(item: Map) {
-                // ignore
+                // todo: upload
+                Toast.makeText(this@LocalMapListActivity, "on upload: ${item.map_name}", Toast.LENGTH_SHORT).show()
+//                val payload = PositioningRequest(map_id = 88044496, pose = PositioningRequestPose(0, 0, 0))
+//                viewModel.positioning(projectID, item.robot_id, payload)
             }
         })
         val layoutManager = LinearLayoutManager(this)
@@ -45,14 +48,11 @@ class MapListActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.setHasFixedSize(true)
 
-        // projectID?
-        val projectID = intent.getIntExtra("project-id", 0)
-        mapListViewModel.getList(projectID)
-
         mapListViewModel.mapListResult.observe(this, Observer {
             if (it.error != null) {
                 Toast.makeText(this, it.error, Toast.LENGTH_LONG).show()
             }
         })
+        mapListViewModel.getList()
     }
 }

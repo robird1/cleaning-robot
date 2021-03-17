@@ -12,6 +12,7 @@ class MapListAdapter(val listener: OnItemClickListener): ListAdapter<Map, MapLis
 
     interface OnItemClickListener{
         fun onItemClicked(item: Map)
+        fun onUpload(item: Map) // for robot upload local map
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<Map>() {

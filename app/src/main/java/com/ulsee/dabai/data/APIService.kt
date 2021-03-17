@@ -49,6 +49,10 @@ interface ApiService {
     @POST("/v1/{projectID}/tasks/{taskID}/send")
     suspend fun executeTask(@Path("projectID") projectID: Int, @Path("taskID") taskID: Int): EmptyResponse
 
+    // local get map list
+    @GET("/api/maps")
+    suspend fun getMapList(): MapListResponse
+
     companion object {
         var token: String? = null
         fun create(baseUrl: String): ApiService {

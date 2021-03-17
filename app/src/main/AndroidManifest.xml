@@ -24,7 +24,7 @@
         <activity
             android:name=".ui.tutorials.WIFIConnectionTutorialActivity" />
         <activity
-            android:name=".ui.map.CreateMapActivity" />
+            android:name=".ui.robot_local.CreateMapActivity" />
         <activity
             android:name="com.ulsee.dabai.ui.main.MainActivity" android:theme="@style/Theme.Dabai.NoActionBar" />
         <activity
@@ -34,7 +34,9 @@
         <activity
             android:name="com.ulsee.dabai.ui.main.task.TaskListActivity" />
         <activity
-            android:name=".ui.map.ExploreActivity" android:screenOrientation="portrait" />
+            android:name="com.ulsee.dabai.ui.robot_local.LocalMapListActivity" />
+        <activity
+            android:name=".ui.robot_local.ExploreActivity" android:screenOrientation="portrait" />
 
     </application>
 
