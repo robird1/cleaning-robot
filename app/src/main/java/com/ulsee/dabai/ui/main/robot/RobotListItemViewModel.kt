@@ -6,4 +6,17 @@ import androidx.lifecycle.ViewModel
 
 class RobotListItemViewModel : ViewModel() {
     val name: LiveData<String> = MutableLiveData("name")
+    private var mOnPositionCallback : onPositionCallback? = null
+
+    interface onPositionCallback {
+        fun onPosition()
+    }
+
+    fun setOnPositionCallback(cb: onPositionCallback) {
+        mOnPositionCallback = cb
+    }
+
+    fun onPosition() {
+        mOnPositionCallback?.onPosition()
+    }
 }

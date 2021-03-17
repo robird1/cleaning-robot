@@ -12,6 +12,7 @@ class RobotListAdapter(val listener: OnItemClickListener): ListAdapter<Robot, Ro
 
     interface OnItemClickListener{
         fun onItemClicked(item: Robot)
+        fun onPosition(item: Robot)
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<Robot>() {
@@ -37,6 +38,11 @@ class RobotListAdapter(val listener: OnItemClickListener): ListAdapter<Robot, Ro
                 holder.itemView.setOnClickListener {
                     listener.onItemClicked(item)
                 }
+                holder.setOnPositionCallback(object: RobotListItemViewModel.onPositionCallback{
+                    override fun onPosition() {
+                        listener.onPosition(item)
+                    }
+                })
                 holder.setResult(item)
             }
         }
@@ -44,8 +50,15 @@ class RobotListAdapter(val listener: OnItemClickListener): ListAdapter<Robot, Ro
 
     class RobotViewHolder(private val binding: ItemRobotListBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun setResult(dataItem: Robot) {
+        private val mViewModel: RobotListItemViewModel = RobotListItemViewModel()
 
+        init {
+            binding.viewModel = mViewModel
+        }
+        fun setOnPositionCallback(cb: RobotListItemViewModel.onPositionCallback) {
+            mViewModel.setOnPositionCallback(cb)
+        }
+        fun setResult(dataItem: Robot) {
             binding.dataItem = dataItem
             binding.executePendingBindings()
         }

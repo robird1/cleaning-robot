@@ -26,4 +26,18 @@ class TaskListViewModel(private val repository: TaskCloudRepository) : ViewModel
             }
         }
     }
+
+    private val _executeTaskResult = MutableLiveData<ExecuteTaskResult>()
+    val executeTaskResult: LiveData<ExecuteTaskResult> = _executeTaskResult
+    fun execute(projectID: Int, taskID: Int) {
+        viewModelScope.launch {
+            val result = repository.executeTask(projectID, taskID)
+
+            if (result is Result.Success) {
+                _executeTaskResult.value = ExecuteTaskResult(success = true)
+            } else {
+                _executeTaskResult.value = ExecuteTaskResult(success = false, error = R.string.execute_task_failed)
+            }
+        }
+    }
 }

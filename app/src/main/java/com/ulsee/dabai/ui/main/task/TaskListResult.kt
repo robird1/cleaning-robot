@@ -6,3 +6,7 @@ data class TaskListResult (
     val success: List<Task>? = null,
     val error: Int? = null
 )
+data class ExecuteTaskResult (
+        val success: Boolean,
+        val error: Int? = null
+)

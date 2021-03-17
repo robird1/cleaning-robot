@@ -1,5 +1,6 @@
 package com.ulsee.dabai.data
 
+import com.ulsee.dabai.data.response.EmptyResponse
 import com.ulsee.dabai.data.response.Task
 import com.ulsee.dabai.data.response.TaskListResponse
 
@@ -18,6 +19,11 @@ class TaskCloudRepository(val dataSource: TaskCloudDataSource) {
             setList(result.data.data.tasks)
         }
 
+        return result
+    }
+
+    suspend fun executeTask(projectID: Int, taskID: Int): Result<EmptyResponse> {
+        val result = dataSource.executeTask(projectID, taskID)
         return result
     }
 

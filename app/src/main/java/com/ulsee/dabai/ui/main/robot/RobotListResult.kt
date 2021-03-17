@@ -6,3 +6,7 @@ data class RobotListResult (
         val success: List<Robot>? = null,
         val error: Int? = null
 )
+data class RobotPositioningResult (
+        val success: Boolean,
+        val error: Int? = null
+)

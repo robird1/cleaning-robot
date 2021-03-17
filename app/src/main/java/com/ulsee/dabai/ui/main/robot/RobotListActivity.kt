@@ -36,6 +36,11 @@ class RobotListActivity : AppCompatActivity() {
                 // todo: 建圖或執行腳本
                 Toast.makeText(this@RobotListActivity, "TODO", Toast.LENGTH_LONG).show()
             }
+
+            override fun onPosition(item: Robot) {
+                // todo: position
+                Toast.makeText(this@RobotListActivity, "on position: ${item.robot_id}", Toast.LENGTH_LONG).show()
+            }
         })
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = LinearLayoutManager.VERTICAL

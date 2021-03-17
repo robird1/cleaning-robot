@@ -34,6 +34,11 @@ class TaskListActivity : AppCompatActivity() {
                 // todo: 建圖或執行腳本
                 Toast.makeText(this@TaskListActivity, "TODO", Toast.LENGTH_LONG).show()
             }
+
+            override fun onExecuteClicked(item: Task) {
+                // todo: execute
+                Toast.makeText(this@TaskListActivity, "on execute: ${item.name}", Toast.LENGTH_LONG).show()
+            }
         })
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
