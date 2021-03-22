@@ -9,10 +9,6 @@
             android:icon="@drawable/ic_baseline_map_24"
             android:title="@string/menu_create_map" />
         <item
-            android:id="@+id/nav_robot_map"
-            android:icon="@drawable/ic_baseline_map_24"
-            android:title="@string/menu_robot_map" />
-        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_baseline_exit_to_app_24"
             android:title="@string/manu_logout" />

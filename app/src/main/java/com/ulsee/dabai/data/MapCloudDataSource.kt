@@ -1,12 +1,33 @@
 package com.ulsee.dabai.data
 
+import com.ulsee.dabai.data.request.PositioningRequest
+import com.ulsee.dabai.data.request.UploadMapRequest
+import com.ulsee.dabai.data.response.EmptyResponse
 import com.ulsee.dabai.data.response.MapListResponse
 
 class MapCloudDataSource(val url: String) {
 
-    suspend fun getList(projectID: Int): Result<MapListResponse> {
+    suspend fun getProjectMapList(projectID: Int): Result<MapListResponse> {
         return try {
-            val response = ApiService.create(url).getMapList(projectID)
+            val response = ApiService.create(url).getProjectMapList(projectID)
+            Result.Success(response)
+        } catch (e: Exception) {
+            Result.Error(e)
+        }
+    }
+
+    suspend fun getRobotMapList(projectID: Int, robotID: Int): Result<MapListResponse> {
+        return try {
+            val response = ApiService.create(url).getRobotMapList(projectID, robotID)
+            Result.Success(response)
+        } catch (e: Exception) {
+            Result.Error(e)
+        }
+    }
+
+    suspend fun upload(projectID: Int, mapID: Int, payload: UploadMapRequest): Result<EmptyResponse> {
+        return try {
+            val response = ApiService.create(url).uploadMap(projectID, mapID, payload)
             Result.Success(response)
         } catch (e: Exception) {
             Result.Error(e)

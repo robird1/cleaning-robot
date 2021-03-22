@@ -1,5 +1,6 @@
 package com.ulsee.dabai.ui.main.robot
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.ulsee.dabai.data.request.PositioningRequestPose
 import com.ulsee.dabai.data.response.Robot
 import com.ulsee.dabai.databinding.FragmentRobotListBinding
 import com.ulsee.dabai.ui.main.MainActivity
+import com.ulsee.dabai.ui.main.robot.map.RobotMapListActivity
 
 class RobotListFragment : Fragment() {
 
@@ -51,6 +53,13 @@ class RobotListFragment : Fragment() {
                 Toast.makeText(context, "on position: ${item.robot_id}", Toast.LENGTH_LONG).show()
                 val payload = PositioningRequest(map_id = 88044496, pose = PositioningRequestPose(0, 0, 0))
                 viewModel.positioning(projectID, item.robot_id, payload)
+            }
+
+            override fun onMap(item: Robot) {
+                val intent = Intent(context, RobotMapListActivity::class.java)
+                intent.putExtra("project-id", projectID)
+                intent.putExtra("robot-id", item.robot_id)
+                startActivity(intent)
             }
         })
         val layoutManager = LinearLayoutManager(context)

@@ -7,22 +7,52 @@ import androidx.lifecycle.viewModelScope
 import com.ulsee.dabai.R
 import com.ulsee.dabai.data.Result
 import com.ulsee.dabai.data.MapCloudRepository
+import com.ulsee.dabai.data.request.UploadMapRequest
 import kotlinx.coroutines.launch
 
 
 class MapListViewModel(private val repository: MapCloudRepository) : ViewModel() {
 
-    private val _mapListResult = MutableLiveData<MapListResult>()
-    val mapListResult: LiveData<MapListResult> = _mapListResult
+    private val _projectMapListResult = MutableLiveData<MapListResult>()
+    val projectMapListResult: LiveData<MapListResult> = _projectMapListResult
 
-    fun getList(projectID: Int) {
+    fun getProjectMapList(projectID: Int) {
         viewModelScope.launch {
-            val result = repository.getList(projectID)
+            val result = repository.getProjectMapList(projectID)
 
             if (result is Result.Success) {
-                _mapListResult.value = MapListResult(success = result.data.data)
+                _projectMapListResult.value = MapListResult(success = result.data.data)
             } else {
-                _mapListResult.value = MapListResult(error = R.string.get_map_list_failed)
+                _projectMapListResult.value = MapListResult(error = R.string.get_map_list_failed)
+            }
+        }
+    }
+
+    private val _robotMapListResult = MutableLiveData<MapListResult>()
+    val robotMapListResult: LiveData<MapListResult> = _robotMapListResult
+
+    fun getRobotMapList(projectID: Int, robotID: Int) {
+        viewModelScope.launch {
+            val result = repository.getRobotMapList(projectID, robotID)
+
+            if (result is Result.Success) {
+                _robotMapListResult.value = MapListResult(success = result.data.data)
+            } else {
+                _robotMapListResult.value = MapListResult(error = R.string.get_map_list_failed)
+            }
+        }
+    }
+
+    private val _uploadMapResult = MutableLiveData<UploadMapResult>()
+    val uploadMapResult: LiveData<UploadMapResult> = _uploadMapResult
+    fun upload(projectID: Int, mapID: Int, payload: UploadMapRequest) {
+        viewModelScope.launch {
+            val result = repository.upload(projectID, mapID, payload)
+
+            if (result is Result.Success) {
+                _uploadMapResult.value = UploadMapResult(success = true)
+            } else {
+                _uploadMapResult.value = UploadMapResult(success = false, error = R.string.upload_map_failed)
             }
         }
     }

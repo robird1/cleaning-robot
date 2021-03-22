@@ -20,7 +20,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import com.ulsee.dabai.R
 import com.ulsee.dabai.ui.robot_local.CreateMapActivity
-import com.ulsee.dabai.ui.robot_local.LocalMapListActivity
+import com.ulsee.dabai.ui.main.robot.map.RobotMapListActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -70,7 +70,6 @@ class MainActivity : AppCompatActivity() {
         navView.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.nav_create_map -> startActivity(Intent(this, CreateMapActivity::class.java))
-                R.id.nav_robot_map -> startActivity(Intent(this, LocalMapListActivity::class.java))
                 R.id.nav_logout -> logout()
             }
             return@setNavigationItemSelectedListener false

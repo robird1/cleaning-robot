@@ -3,6 +3,7 @@ package com.ulsee.dabai.data
 import com.ulsee.dabai.data.request.CreateMapRequest
 import com.ulsee.dabai.data.request.LoginRequest
 import com.ulsee.dabai.data.request.PositioningRequest
+import com.ulsee.dabai.data.request.UploadMapRequest
 import com.ulsee.dabai.data.response.*
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -38,7 +39,10 @@ interface ApiService {
     suspend fun getRobotList(@Path("projectID") projectID: Int): RobotListResponse
 
     @GET("/v1/{projectID}/maps")
-    suspend fun getMapList(@Path("projectID") projectID: Int): MapListResponse
+    suspend fun getProjectMapList(@Path("projectID") projectID: Int): MapListResponse
+
+    @GET("/v1/{projectID}/robots/{robotID}/maps")
+    suspend fun getRobotMapList(@Path("projectID") projectID: Int, @Path("robotID") robotID: Int): MapListResponse
 
     @GET("/v1/{projectID}/tasks")
     suspend fun getTaskList(@Path("projectID") projectID: Int): TaskListResponse
@@ -48,6 +52,9 @@ interface ApiService {
 
     @POST("/v1/{projectID}/tasks/{taskID}/send")
     suspend fun executeTask(@Path("projectID") projectID: Int, @Path("taskID") taskID: Int): EmptyResponse
+
+    @POST("/v1/{projectID}/maps/{mapID}/upload")
+    suspend fun uploadMap(@Path("projectID") projectID: Int, @Path("mapID") mapID: Int, @Body params: UploadMapRequest): EmptyResponse
 
     // local get map list
     @GET("/api/maps")

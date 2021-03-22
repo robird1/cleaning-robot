@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ulsee.dabai.data.response.Map
+import com.ulsee.dabai.data.response.Robot
 import com.ulsee.dabai.databinding.ItemMapListBinding
+import com.ulsee.dabai.ui.main.robot.RobotListItemViewModel
 
 class MapListAdapter(val listener: OnItemClickListener): ListAdapter<Map, MapListAdapter.MapViewHolder>(DiffCallback) {
 
@@ -21,7 +23,7 @@ class MapListAdapter(val listener: OnItemClickListener): ListAdapter<Map, MapLis
             return oldItem === newItem
         }
         override fun areContentsTheSame(oldItem: Map, newItem: Map): Boolean {
-            return oldItem.map_id == newItem.map_id
+            return oldItem.map_id == newItem.map_id && oldItem.uploadable == newItem.uploadable
         }
     }
 
@@ -38,6 +40,11 @@ class MapListAdapter(val listener: OnItemClickListener): ListAdapter<Map, MapLis
                 holder.itemView.setOnClickListener {
                     listener.onItemClicked(item)
                 }
+                holder.setOnUploadCallback(object: MapListItemViewModel.onUploadCallback{
+                    override fun onUpload() {
+                        listener.onUpload(item)
+                    }
+                })
                 holder.setResult(item)
             }
         }
@@ -45,8 +52,15 @@ class MapListAdapter(val listener: OnItemClickListener): ListAdapter<Map, MapLis
 
     class MapViewHolder(private val binding: ItemMapListBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun setResult(dataItem: Map) {
+        private val mViewModel: MapListItemViewModel = MapListItemViewModel()
 
+        init {
+            binding.viewModel = mViewModel
+        }
+        fun setOnUploadCallback(cb: MapListItemViewModel.onUploadCallback) {
+            mViewModel.setOnUploadCallback(cb)
+        }
+        fun setResult(dataItem: Map) {
             binding.dataItem = dataItem
             binding.executePendingBindings()
         }

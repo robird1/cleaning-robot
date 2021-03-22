@@ -10,10 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ulsee.dabai.R
-import com.ulsee.dabai.data.request.PositioningRequest
-import com.ulsee.dabai.data.request.PositioningRequestPose
 import com.ulsee.dabai.data.response.Map
-import com.ulsee.dabai.data.response.Robot
 import com.ulsee.dabai.databinding.FragmentMapListBinding
 
 class MapListFragment : Fragment() {
@@ -51,9 +48,9 @@ class MapListFragment : Fragment() {
 
         // projectID?
         val projectID = activity?.intent?.getIntExtra("project-id", 0) ?: 0
-        viewModel.getList(projectID)
+        viewModel.getProjectMapList(projectID)
 
-        viewModel.mapListResult.observe(requireActivity(),  {
+        viewModel.projectMapListResult.observe(requireActivity(),  {
             if (it.error != null) {
                 Toast.makeText(context, it.error, Toast.LENGTH_LONG).show()
             }

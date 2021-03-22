@@ -34,7 +34,7 @@
         <activity
             android:name="com.ulsee.dabai.ui.main.task.TaskListActivity" />
         <activity
-            android:name="com.ulsee.dabai.ui.robot_local.LocalMapListActivity" />
+            android:name="com.ulsee.dabai.ui.main.robot.map.RobotMapListActivity" />
         <activity
             android:name=".ui.robot_local.ExploreActivity" android:screenOrientation="portrait" />
 

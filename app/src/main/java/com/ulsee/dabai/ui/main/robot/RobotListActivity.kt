@@ -1,5 +1,6 @@
 package com.ulsee.dabai.ui.main.robot
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ulsee.dabai.R
 import com.ulsee.dabai.data.response.Robot
 import com.ulsee.dabai.databinding.ActivityRobotListBinding
+import com.ulsee.dabai.ui.main.robot.map.RobotMapListActivity
 
 class RobotListActivity : AppCompatActivity() {
 
@@ -40,6 +42,10 @@ class RobotListActivity : AppCompatActivity() {
             override fun onPosition(item: Robot) {
                 // todo: position
                 Toast.makeText(this@RobotListActivity, "on position: ${item.robot_id}", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onMap(item: Robot) {
+                Toast.makeText(this@RobotListActivity, "on map: ${item.robot_id}", Toast.LENGTH_LONG).show()
             }
         })
         val layoutManager = LinearLayoutManager(this)

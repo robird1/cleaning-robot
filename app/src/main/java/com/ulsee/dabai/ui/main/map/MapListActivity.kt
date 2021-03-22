@@ -47,9 +47,9 @@ class MapListActivity : AppCompatActivity() {
 
         // projectID?
         val projectID = intent.getIntExtra("project-id", 0)
-        mapListViewModel.getList(projectID)
+        mapListViewModel.getProjectMapList(projectID)
 
-        mapListViewModel.mapListResult.observe(this, Observer {
+        mapListViewModel.projectMapListResult.observe(this, Observer {
             if (it.error != null) {
                 Toast.makeText(this, it.error, Toast.LENGTH_LONG).show()
             }

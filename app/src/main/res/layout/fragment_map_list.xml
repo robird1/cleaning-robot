@@ -18,7 +18,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:mapItems="@{viewmodel.mapListResult}" ></androidx.recyclerview.widget.RecyclerView>
+            app:mapItems="@{viewmodel.projectMapListResult}" ></androidx.recyclerview.widget.RecyclerView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

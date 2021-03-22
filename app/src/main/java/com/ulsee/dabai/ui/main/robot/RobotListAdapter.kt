@@ -13,6 +13,7 @@ class RobotListAdapter(val listener: OnItemClickListener): ListAdapter<Robot, Ro
     interface OnItemClickListener{
         fun onItemClicked(item: Robot)
         fun onPosition(item: Robot)
+        fun onMap(item: Robot)
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<Robot>() {
@@ -43,6 +44,11 @@ class RobotListAdapter(val listener: OnItemClickListener): ListAdapter<Robot, Ro
                         listener.onPosition(item)
                     }
                 })
+                holder.setOnMapCallback(object: RobotListItemViewModel.onMapCallback{
+                    override fun onMap() {
+                        listener.onMap(item)
+                    }
+                })
                 holder.setResult(item)
             }
         }
@@ -57,6 +63,9 @@ class RobotListAdapter(val listener: OnItemClickListener): ListAdapter<Robot, Ro
         }
         fun setOnPositionCallback(cb: RobotListItemViewModel.onPositionCallback) {
             mViewModel.setOnPositionCallback(cb)
+        }
+        fun setOnMapCallback(cb: RobotListItemViewModel.onMapCallback) {
+            mViewModel.setOnMapCallback(cb)
         }
         fun setResult(dataItem: Robot) {
             binding.dataItem = dataItem

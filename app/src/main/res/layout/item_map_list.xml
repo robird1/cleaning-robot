@@ -5,9 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="dataItem"
             type="com.ulsee.dabai.data.response.Map"/>
+        <variable name="viewModel" type="com.ulsee.dabai.ui.main.map.MapListItemViewModel"/>
+
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -30,6 +33,16 @@
             android:textColor="@android:color/black"
             android:gravity="center|start"
             android:paddingStart="10dp"></TextView>
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="@{dataItem.uploadable ? View.VISIBLE: View.GONE}"
+            android:src="@drawable/ic_baseline_cloud_upload_24"
+            android:onClick="@{(v) -> viewModel.onUpload()}"></ImageButton>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

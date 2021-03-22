@@ -30,6 +30,8 @@
     <string name="create_map_success">"enter map mode successfully"</string>
     <string name="get_robot_list_failed">"Failed to get robots"</string>
     <string name="get_map_list_failed">"Failed to get maps"</string>
+    <string name="upload_map_failed">"Failed to upload map"</string>
+
     <string name="get_task_list_failed">"Failed to get tasks"</string>
     <string name="positioning_robot_failed">Failed to positioning robot</string>
     <string name="execute_task_failed">Failed to execute task</string>
