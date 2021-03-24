@@ -58,6 +58,7 @@ class ExploreActivity: AppCompatActivity() {
     private fun initExitCreateMapObserver() {
         viewModel.exitCreateMapResult.observe(this, Observer {
             progressBar.visibility = View.INVISIBLE
+            setResult(RESULT_OK)
             finish()
         })
     }

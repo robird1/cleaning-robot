@@ -22,6 +22,8 @@ class CreateMapActivity: AppCompatActivity() {
     private lateinit var createBtn: Button
     private lateinit var loading: ProgressBar
 
+    val REQUEST_CODE_CREATE_MAP_EXPLORE = 1234
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_map)
@@ -58,7 +60,7 @@ class CreateMapActivity: AppCompatActivity() {
                 val intent = Intent(this, ExploreActivity::class.java)
                 intent.putExtra("map_name", mapName.text.toString())
                 intent.putExtra("map_floor", mapFloor.text.toString())
-                startActivity(intent)
+                startActivityForResult(intent, REQUEST_CODE_CREATE_MAP_EXPLORE)
             }
         })
 
@@ -109,5 +111,13 @@ class CreateMapActivity: AppCompatActivity() {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_CODE_CREATE_MAP_EXPLORE) {
+            if (resultCode == RESULT_OK) {
+                finish()
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
 }
 
