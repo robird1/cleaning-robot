@@ -17,6 +17,11 @@ class MapListFragment : Fragment() {
 
     private lateinit var viewModel: MapListViewModel
 
+    interface OnMapClickListener{
+        fun onItemClicked(item: Map)
+    }
+    public var onMapClickListener : OnMapClickListener? = null;
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,8 +37,7 @@ class MapListFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.recyclerView.adapter = MapListAdapter(object: MapListAdapter.OnItemClickListener{
             override fun onItemClicked(item: Map) {
-                // todo: 建圖或執行腳本
-                Toast.makeText(context, "TODO", Toast.LENGTH_LONG).show()
+                onMapClickListener?.onItemClicked(item)
             }
 
             override fun onUpload(item: Map) {

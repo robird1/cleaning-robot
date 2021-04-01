@@ -30,6 +30,8 @@
         <activity
             android:name="com.ulsee.dabai.ui.main.robot.RobotListActivity" />
         <activity
+            android:name="com.ulsee.dabai.ui.main.robot.positioning.PositioningActivity" android:theme="@style/Theme.Dabai.NoActionBar" />
+        <activity
             android:name="com.ulsee.dabai.ui.main.map.MapListActivity" />
         <activity
             android:name="com.ulsee.dabai.ui.main.task.TaskListActivity" />

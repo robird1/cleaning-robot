@@ -18,6 +18,7 @@ import com.ulsee.dabai.data.response.Robot
 import com.ulsee.dabai.databinding.FragmentRobotListBinding
 import com.ulsee.dabai.ui.main.MainActivity
 import com.ulsee.dabai.ui.main.robot.map.RobotMapListActivity
+import com.ulsee.dabai.ui.main.robot.positioning.PositioningActivity
 
 class RobotListFragment : Fragment() {
 
@@ -50,9 +51,14 @@ class RobotListFragment : Fragment() {
             }
 
             override fun onPosition(item: Robot) {
-                Toast.makeText(context, "on position: ${item.robot_id}", Toast.LENGTH_LONG).show()
-                val payload = PositioningRequest(map_id = 88044496, pose = PositioningRequestPose(0, 0, 0))
-                viewModel.positioning(projectID, item.robot_id, payload)
+//                Toast.makeText(context, "on position: ${item.robot_id}", Toast.LENGTH_LONG).show()
+//                val payload = PositioningRequest(map_id = 88044496, pose = PositioningRequestPose(1.3238803688964893, -3.4128883967895494, 0))
+//                viewModel.positioning(projectID, item.robot_id, payload)
+
+                val intent = Intent(context, PositioningActivity::class.java)
+                intent.putExtra("project-id", projectID)
+                intent.putExtra("robot-id", item.robot_id)
+                startActivity(intent)
             }
 
             override fun onMap(item: Robot) {
@@ -81,6 +87,7 @@ class RobotListFragment : Fragment() {
                 Toast.makeText(context, it.error, Toast.LENGTH_LONG).show()
             } else {
                 Log.d(TAG, "定位成功")
+                Toast.makeText(context, R.string.positioning_robot_succeed, Toast.LENGTH_LONG).show()
             }
         })
 

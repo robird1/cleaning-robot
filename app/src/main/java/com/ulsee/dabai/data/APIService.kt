@@ -5,10 +5,7 @@ import com.ulsee.dabai.data.request.LoginRequest
 import com.ulsee.dabai.data.request.PositioningRequest
 import com.ulsee.dabai.data.request.UploadMapRequest
 import com.ulsee.dabai.data.response.*
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
 import retrofit2.Retrofit
@@ -59,6 +56,9 @@ interface ApiService {
     // local get map list
     @GET("/api/maps")
     suspend fun getMapList(): MapListResponse
+
+    @GET("/map/static/{projectID}/{mapID}/{mapID}.png")
+    suspend fun getMap(@Path("projectID") projectID: Int,@Path("mapID") mapID: Int): ResponseBody
 
     companion object {
         var token: String? = null

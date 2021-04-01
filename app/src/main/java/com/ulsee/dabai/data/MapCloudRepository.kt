@@ -5,6 +5,7 @@ import com.ulsee.dabai.data.request.UploadMapRequest
 import com.ulsee.dabai.data.response.EmptyResponse
 import com.ulsee.dabai.data.response.Map
 import com.ulsee.dabai.data.response.MapListResponse
+import okhttp3.ResponseBody
 
 class MapCloudRepository(val dataSource: MapCloudDataSource) {
 
@@ -35,6 +36,11 @@ class MapCloudRepository(val dataSource: MapCloudDataSource) {
 
     suspend fun upload(projectID: Int, mapID: Int, payload: UploadMapRequest): Result<EmptyResponse> {
         val result = dataSource.upload(projectID, mapID, payload)
+        return result
+    }
+
+    suspend fun getMapImage(projectID: Int, mapID: Int): Result<ResponseBody> {
+        val result = dataSource.getMapImage(projectID, mapID)
         return result
     }
 }

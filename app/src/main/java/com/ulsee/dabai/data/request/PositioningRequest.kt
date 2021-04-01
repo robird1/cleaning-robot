@@ -5,7 +5,7 @@ data class PositioningRequest (
         val pose: PositioningRequestPose
 )
 data class PositioningRequestPose (
-        val x: Int,
-        val y: Int,
+        val x: Double,
+        val y: Double,
         val yaw: Int
 )
